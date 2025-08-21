@@ -31,11 +31,14 @@ public class PhantomBusterService {
 
     private final RestTemplate restTemplate;
 
-    @Value("blh72eKMk9RMeOxyVIv34u8aYCyLZeKtN05uMvU71Gw")
-    public String apiKey;
+     @Value("${phantombuster.api.key}")
+    private String apiKey;
 
-    @Value("6899119040571770")
-    public String agentId;
+    @Value("${phantombuster.agent.id}")
+    private String agentId;
+    
+    @Value("${phantombuster.session.cookie}")
+    private String sessionCookie;
 
     public PhantomBusterService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -67,7 +70,7 @@ public class PhantomBusterService {
         Map<String, Object> argument = Map.of(
                 "search", buildLinkedInSearchUrl(request),
                 "numberOfProfilesPerLaunch", 10,
-                "sessionCookie", "AQEFAHUBAAAAABcUjREAAAGYGTPs6wAAAZjcPvNBTQAAGHVybjpsaTptZW1iZXI6MTExMDkxNTAxNnQLTFHZ47nhxvU5wpA2loCEbIyQet8V9SWL8dPoMIC_yYQaS-NC_3NLC3vvRx-O7fS4hQfwNYr3k3PllIi1I5dvTSBC8yoVNCm7UKgQiCOTnaFrGnH3VIi06wrhnbGFT6rNPr2gssiwvzSWo7Pf_QsEW8kBh0Uv6ukX5Y5FDZkvUIi_yqHtLUl61nbrStgBJ63G7Uw"
+                "sessionCookie",sessionCookie"
         );
 
         Map<String, Object> body = Map.of("id", agentId, "argument", argument);
